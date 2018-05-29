@@ -16,5 +16,9 @@
 // Import commands.js using ES2015 syntax:
 import './todos_commands'
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
+// Necesitamos esto para forzar al browser a no utilizar window.fetch 
+// y usar requests XHR (ajax). Cypress solo sabe interceptar dichas requests 
+// de momento
+Cypress.on("window:before:load", win => {
+    win.fetch = null;
+});
